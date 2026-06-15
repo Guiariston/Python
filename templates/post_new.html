@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="form-container">
+    <h2>Novo Post</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div class="form-buttons">
+            <button type="submit" class="btn-save">Salvar</button>
+            <a href="{% url 'home' %}" class="btn-cancel">Cancelar</a>
+        </div>
+    </form>
+</div>
+
+{% endblock content %}

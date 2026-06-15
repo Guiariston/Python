@@ -1,9 +1,96 @@
 {% extends "base.html" %}
 {% block content %}
+
+<!-- Cabeçalho da página com botão de novo post -->
+<div class="page-header">
+    <h2>Posts Recentes</h2>
+    <a href="{% url 'post_new' %}" class="btn-new">+ Novo Post</a>
+</div>
+
+<!-- Lista de posts -->
 {% for post in posts %}
 <div class="post-entry">
-    <h2><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h2> <!-- new -->
-    <p>{{ post.body }}</p>
+    <h2><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h2>
+    <p class="post-author">✍️ {{ post.author }}</p>
+    <p class="post-body">{{ post.body|truncatewords:20 }}</p> <!-- Mostra só as primeiras 20 palavras -->
+    <a href="{{ post.get_absolute_url }}" class="btn-read">Ler mais →</a>
 </div>
+{% empty %}
+    <!-- Mensagem caso não haja posts -->
+    <p class="empty">Nenhum post encontrado. Crie o primeiro!</p>
 {% endfor %}
+
+<!-- Estilos da página -->
+<style>
+    .page-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+        border-bottom: 2px solid #eee;
+        padding-bottom: 10px;
+    }
+
+    .btn-new {
+        background-color: #4CAF50;
+        color: white;
+        padding: 8px 16px;
+        border-radius: 6px;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    .btn-new:hover {
+        background-color: #45a049;
+    }
+
+    .post-entry {
+        background: #f9f9f9;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 16px 20px;
+        margin-bottom: 16px;
+    }
+
+    .post-entry h2 a {
+        text-decoration: none;
+        color: #333;
+    }
+
+    .post-entry h2 a:hover {
+        color: #4CAF50;
+    }
+
+    .post-author {
+        color: #888;
+        font-size: 0.85em;
+        margin: 4px 0 8px 0;
+    }
+
+    .post-body {
+        color: #555;
+        margin-bottom: 12px;
+    }
+
+    .btn-read {
+    background-color: #007bff;
+    color: white;
+    padding: 6px 14px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 0.9em;
+    display: inline-block; /* adiciona essa linha */
+    margin-top: 8px;
+}
+
+    .btn-read:hover {
+        background-color: #0056b3;
+    }
+
+    .empty {
+        color: #999;
+        font-style: italic;
+    }
+</style>
+
 {% endblock content %}

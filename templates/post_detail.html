@@ -1,7 +1,52 @@
 {% extends "base.html" %}
 {% block content %}
-    <div class="post-entry">
+
+<div class="post-detail">
     <h2>{{ post.title }}</h2>
-    <p>{{ post.body }}</p>
+    <p class="post-author">✍️ {{ post.author }}</p>
+    <p class="post-body">{{ post.body }}</p>
+    <div class="detail-buttons">
+        <a href="{% url 'post_edit' post.pk %}" class="btn-edit">✏️ Editar</a>
+        <a href="{% url 'post_delete' post.pk %}" class="btn-delete">🗑️ Deletar</a>
+        <a href="{% url 'home' %}" class="btn-back">← Voltar</a>
+    </div>
 </div>
+
+<style>
+    .post-detail {
+        background: #f9f9f9;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 24px;
+        max-width: 700px;
+    }
+    .post-author { color: #888; font-size: 0.85em; margin-bottom: 16px; }
+    .post-body { color: #444; line-height: 1.6; }
+    .detail-buttons { margin-top: 20px; display: flex; gap: 10px; }
+    .btn-edit {
+        background-color: #007bff;
+        color: white;
+        padding: 8px 16px;
+        border-radius: 6px;
+        text-decoration: none;
+    }
+    .btn-edit:hover { background-color: #0056b3; }
+    .btn-delete {
+        background-color: #dc3545;
+        color: white;
+        padding: 8px 16px;
+        border-radius: 6px;
+        text-decoration: none;
+    }
+    .btn-delete:hover { background-color: #b02a37; }
+    .btn-back {
+        background-color: #ccc;
+        color: #333;
+        padding: 8px 16px;
+        border-radius: 6px;
+        text-decoration: none;
+    }
+    .btn-back:hover { background-color: #bbb; }
+</style>
+
 {% endblock content %}
